@@ -5,6 +5,7 @@ import os
 import logging
 import time
 import subprocess
+import re
 
 
 def main():
@@ -36,7 +37,7 @@ def main():
         command = "sudo nmcli dev wifi rescan"
         subprocess.run(command, shell=True, check=True)
 
-        command = "sudo nmcli -g ssid,signal dev wifi list | grep SIT-WIFI"
+        command = r"sudo nmcli -g in-use,bssid,ssid,signal dev wifi list"
         result = subprocess.run(
             command,
             shell=True,
@@ -45,7 +46,15 @@ def main():
             check=False,
         )
         try:
-            ssid, signal_strength = result.stdout.decode().strip().split(":")
+            out = result.stdout.decode()
+
+            # Filter only the SIT-WIFI signal strength with BSSID.
+            r = re.compile(r"(:88\\:9C\\:AD\\:E1\\:22\\:6D:.*)").search(out)
+            out = r.group()
+
+            # Now get the signal strength from the filtered output.
+            r = re.compile(r"(\*)?:((?>(?>[0-9A-F]{2})\\:){5}[0-9A-F]{2}):(.*):(\d+)").search(out)
+            in_use, bssid, ssid, signal_strength = r.groups()
             logger.info("SIT-WIFI Signal Strength: %s", signal_strength)
 
             with open("wifi_signal_strength.txt", "a", encoding="utf-8") as f:
