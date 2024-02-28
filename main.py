@@ -52,7 +52,7 @@ def main():
     command = "sudo nmcli dev wifi rescan"
     subprocess.run(command, shell=True, check=True)
 
-    command = r"sudo nmcli -g in-use,bssid,ssid,signal dev wifi list"
+    command = r"sudo nmcli -g in-use,bssid,ssid,signal dev wifi list | grep SIT-POLY"
     result = subprocess.run(
         command,
         shell=True,
@@ -62,19 +62,23 @@ def main():
     )
     try:
         out = result.stdout.decode()
+        aps = out.split("\n")
 
-        # Filter only the SIT-WIFI signal strength with BSSID.
-        r = re.compile(r"(:88\\:9C\\:AD\\:E1\\:22\\:6D:.*)").search(out)
-        out = r.group()
+        for ap in aps:
+            try:
+                # Now get the signal strength from the filtered output.
+                print(ap)
+                r = re.compile(r"(\*)?:((?:(?:[0-9A-F]{2})\\:){5}[0-9A-F]{2}):(.*):(\d+)").search(ap)
+                in_use, bssid, ssid, signal_strength = r.groups()
+                logger.info("SIT-WIFI %s Signal Strength: %s", bssid, signal_strength)
 
-        # Now get the signal strength from the filtered output.
-        r = re.compile(r"(\*)?:((?>(?>[0-9A-F]{2})\\:){5}[0-9A-F]{2}):(.*):(\d+)").search(out)
-        in_use, bssid, ssid, signal_strength = r.groups()
-        logger.info("SIT-WIFI Signal Strength: %s", signal_strength)
-
-        with open("wifi_signal_strength.txt", "a", encoding="utf-8") as f:
-            f.write(f"{time.time()} - {ssid} - {signal_strength}\n")
-            logger.debug("Signal strength written to wifi_signal_strength.txt")
+                with open("wifi_signal_strength.csv", "a", encoding="utf-8") as f:
+                    bssid = bssid.replace("\\", "")
+                    timenow = time.strftime("%Y%m%d%H%M%S")
+                    f.write(f"{timenow}, {bssid}, {ssid}, {signal_strength}\n")
+                    logger.debug("Signal strength written to wifi_signal_strength.txt")
+            except AttributeError:
+                logger.error("Regex failed to match for SIT-WIFI %s", ap)
     except ValueError:
         logger.error("No signal strength found for SIT-WIFI")
 
@@ -83,13 +87,16 @@ def main():
     command = "bluetoothctl scan le & sleep 5; kill $!"
     result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE)
     with open("btoutput.txt", "a", encoding="utf-8") as f2:
-        f2.write(f"{time.time()} - Scan start\n")
+        timenow = time.strftime("%Y%m%d%H%M%S")
+        f2.write(f"{timenow} - Scan start\n")
         output = result.stdout.decode()
         for line in output.splitlines():
-            f2.write(f"{time.time()} - {line}\n")
+            timenow = time.strftime("%Y%m%d%H%M%S")
+            f2.write(f"{timenow} - {line}\n")
             if not line:
                 break
-        f2.write(f"{time.time()} - Scan end\n")
+        timenow = time.strftime("%Y%m%d%H%M%S")
+        f2.write(f"{timenow} - Scan end\n")
         logger.debug("Bluetoothctl output written to btoutput.txt")
 
     print("Program terminated.")
