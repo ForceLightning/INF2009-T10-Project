@@ -75,7 +75,7 @@ def main():
                 with open("wifi_signal_strength.csv", "a", encoding="utf-8") as f:
                     bssid = bssid.replace("\\", "")
                     timenow = time.strftime("%Y%m%d%H%M%S")
-                    f.write(f"{timenow}, {bssid}, {ssid}, {signal_strength}\n")
+                    f.write(f"{timenow},{bssid},{ssid},{signal_strength}\n")
                     logger.debug("Signal strength written to wifi_signal_strength.txt")
             except AttributeError:
                 logger.error("Regex failed to match for SIT-WIFI %s", ap)
