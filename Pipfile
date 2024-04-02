@@ -15,6 +15,7 @@ tqdm = "*"
 
 [dev-packages]
 ipykernel = "*"
+ipywidgets = "*"
 autopep8 = "*"
 pylint = "*"
 
