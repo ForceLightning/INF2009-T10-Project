@@ -37,7 +37,7 @@ def main():
     output_directory = "images"
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
-        logger.debug(f"Created directory: {output_directory}")
+        logger.debug("Created directory: %s", output_directory)
 
     # Take a picture first.
     print("Taking a picture in 5 seconds.")
