@@ -8,6 +8,7 @@ import subprocess
 import re
 
 from util.capture_image import take_picture
+from util.people_detection import detect, getPeopleCount
 
 
 def main():
@@ -44,8 +45,9 @@ def main():
     for i in range(5):
         time.sleep(1)
         print(f"{4 - i}")
-    take_picture("./images/")
-    print("Picture taken and saved.")
+    bbox_count = getPeopleCount(detect(take_picture(save=False)))
+    print(f"Number of people detected: {bbox_count}")
+    # print("Picture taken and saved.")
 
     # Run nmcli command to get the wifi signal strength.
     print("Attempting to get wifi signal strength")
