@@ -6,9 +6,11 @@ import logging
 import time
 import subprocess
 import re
+import json
 
 from util.capture_image import take_picture
 from util.people_detection import detect, getPeopleCount
+from util.wifi_bt_processing import process_signals
 
 
 def main():
@@ -100,6 +102,14 @@ def main():
         timenow = time.strftime("%Y%m%d%H%M%S")
         f2.write(f"{timenow} - Scan end\n")
         logger.debug("Bluetoothctl output written to btoutput.txt")
+    
+    # Data formatting
+    data_dict = process_signals(wifi=(1, 2, 3), bt=4) # Placeholder values where wifi is a tuple and bt is an integer
+    data_dict["bbox_count"] = bbox_count
+
+    # Send data to the fog
+    print("Sending data to the fog")
+    payload = json.dumps(data_dict)
 
     print("Program terminated.")
 
