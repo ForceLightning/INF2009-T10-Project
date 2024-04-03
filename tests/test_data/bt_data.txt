@@ -1,0 +1,36 @@
+Discovery started
+[[0;93mCHG[0m] Controller E4:5F:01:E5:07:90 Discovering: yes
+[[0;93mCHG[0m] Device 4D:63:88:2C:4B:B3 RSSI: -82
+[[0;93mCHG[0m] Device 4D:63:88:2C:4B:B3 TxPower: 12
+[[0;93mCHG[0m] Device 18:EE:69:19:07:E6 RSSI: -77
+[[0;93mCHG[0m] Device 4C:51:00:17:5A:11 RSSI: -89
+[[0;93mCHG[0m] Device 4B:F5:CA:5C:40:84 RSSI: -88
+[[0;93mCHG[0m] Device 4B:F5:CA:5C:40:84 TxPower: 12
+[[0;93mCHG[0m] Device 7E:11:21:B0:39:AA RSSI: -59
+[[0;93mCHG[0m] Device 7E:11:21:B0:39:AA TxPower: 12
+[[0;93mCHG[0m] Device 57:A7:B4:FD:28:7D RSSI: -86
+[[0;93mCHG[0m] Device 57:A7:B4:FD:28:7D TxPower: 12
+[[0;93mCHG[0m] Device 66:AE:E4:EE:91:5A RSSI: -92
+[[0;93mCHG[0m] Device 66:AE:E4:EE:91:5A TxPower: 12
+[[0;93mCHG[0m] Device 66:AE:E4:EE:91:5A ManufacturerData Key: 0x004c
+[[0;93mCHG[0m] Device 66:AE:E4:EE:91:5A ManufacturerData Value:
+  10 07 7e 1f 12 1d 2f 3a 58                       ..~.../:X       
+[[0;92mNEW[0m] Device 54:48:E6:CE:79:7B 54-48-E6-CE-79-7B
+[[0;93mCHG[0m] Device 61:F7:A5:84:19:55 RSSI: -81
+[[0;93mCHG[0m] Device 76:9D:90:4B:30:E7 RSSI: -53
+[[0;93mCHG[0m] Device 76:9D:90:4B:30:E7 TxPower: 9
+[[0;93mCHG[0m] Device 50:8B:B9:A2:21:2D RSSI: -88
+[[0;93mCHG[0m] Device 55:6E:AA:D8:DE:4F RSSI: -88
+[[0;93mCHG[0m] Device 55:6E:AA:D8:DE:4F TxPower: 12
+[[0;93mCHG[0m] Device 7C:BA:E3:AA:83:3D RSSI: -84
+[[0;93mCHG[0m] Device 7C:BA:E3:AA:83:3D TxPower: 17
+[[0;93mCHG[0m] Device 42:95:DA:C5:4A:51 RSSI: -89
+[[0;93mCHG[0m] Device 08:66:98:99:CC:0C RSSI: -83
+[[0;93mCHG[0m] Device 08:66:98:99:CC:0C TxPower: 12
+[[0;93mCHG[0m] Device E8:9F:80:F0:54:56 RSSI: -77
+[[0;93mCHG[0m] Device F3:B9:77:B4:0F:F0 RSSI: -84
+[[0;92mNEW[0m] Device 50:79:88:5D:6E:33 50-79-88-5D-6E-33
+[[0;92mNEW[0m] Device 7A:39:51:87:E5:37 7A-39-51-87-E5-37
+[[0;93mCHG[0m] Device 4A:3E:FD:A6:03:08 RSSI: -90
+[[0;93mCHG[0m] Device 4A:3E:FD:A6:03:08 TxPower: 8
+[[0;91mDEL[0m] Device 56:FB:B9:A8:AF:54 56-FB-B9-A8-AF-54
