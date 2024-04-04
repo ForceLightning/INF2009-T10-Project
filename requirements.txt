@@ -13,3 +13,5 @@ seaborn==0.13.2
 tqdm==4.66.2
 ultralytics==8.1.29
 python-dotenv==1.0.1
+paho-mqtt==2.0.0
+fastapi==0.110.1
