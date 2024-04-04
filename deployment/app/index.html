@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            async function fetchCrowdStatus() {
+                try {
+                    const response = fetch(
+                        "http://localhost:8000/api/get_crowd_status"
+                    )
+                        .then((response) => {
+                            return response.json();
+                        })
+                        .then((data) => {
+                            console.log(data);
+                            document.getElementById("crowd-status").innerHTML =
+                                data.crowd_status;
+                            document.getElementById(
+                                "last-updated"
+                            ).innerHTML = `Last Updated: ${formatTimestamp(
+                                data.timestamp
+                            )}`;
+                        });
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+            }
+
+            function formatTimestamp(timestamp) {
+                let milliseconds = timestamp * 1000;
+
+                let date = new Date(milliseconds);
+
+                // Format the date and time string
+                let formattedDateTime = date.toLocaleString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                });
+
+                return formattedDateTime;
+            }
+        </script>
+    </head>
+    <body onload="fetchCrowdStatus()">
+        <h1>Crowd Estimation Demo App</h1>
+        <div id="crowd-status"></div>
+        <span id="last-updated">Last Updated: </span>
+
+        <br /><button onclick="fetchCrowdStatus()">Refresh</button>
+    </body>
+</html>
