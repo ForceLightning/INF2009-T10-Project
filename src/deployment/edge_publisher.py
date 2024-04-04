@@ -26,8 +26,7 @@ def retrieve_data(device_id: int = DEVICE_IDX, return_image: bool = False) -> st
     :type device_id: int, optional
     :param return_image: Whether to return the image or not, defaults to False
     :type return_image: bool, optional
-    :return: JSON string containing the image, timestamp, wifi signal strength,
-    bluetooth output and device ID
+    :return: JSON string containing the image, timestamp, wifi signal strength, bluetooth output and device ID
     :rtype: str
     """
 

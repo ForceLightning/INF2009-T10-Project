@@ -28,6 +28,7 @@ ipywidgets = "*"
 autopep8 = "*"
 pylint = "*"
 pre-commit = "*"
+sphinx = "*"
 
 [requires]
 python_version = "3.12"

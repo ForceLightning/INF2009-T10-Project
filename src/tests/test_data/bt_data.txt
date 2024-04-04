@@ -14,7 +14,7 @@ Discovery started
 [[0;93mCHG[0m] Device 66:AE:E4:EE:91:5A TxPower: 12
 [[0;93mCHG[0m] Device 66:AE:E4:EE:91:5A ManufacturerData Key: 0x004c
 [[0;93mCHG[0m] Device 66:AE:E4:EE:91:5A ManufacturerData Value:
-  10 07 7e 1f 12 1d 2f 3a 58                       ..~.../:X       
+  10 07 7e 1f 12 1d 2f 3a 58                       ..~.../:X
 [[0;92mNEW[0m] Device 54:48:E6:CE:79:7B 54-48-E6-CE-79-7B
 [[0;93mCHG[0m] Device 61:F7:A5:84:19:55 RSSI: -81
 [[0;93mCHG[0m] Device 76:9D:90:4B:30:E7 RSSI: -53
