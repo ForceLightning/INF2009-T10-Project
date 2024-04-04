@@ -2,18 +2,23 @@ import cv2
 import time
 import os
 
-def take_picture(output_dir):
+def take_picture(output_dir=None, save=True):
     camera = cv2.VideoCapture(0)
 
     try:
-        timestamp = time.strftime("%Y%m%d%H%M")
-        filename = f"image_{timestamp}.jpg"
-        filepath = os.path.join(output_dir, filename)
-
         # Capture the picture
         _, frame = camera.read()
-        cv2.imwrite(filepath, frame)
-        print(f"Picture taken and saved as {filepath}")
+
+        if save:
+            timestamp = time.strftime("%Y%m%d%H%M")
+            filename = f"image_{timestamp}.jpg"
+            filepath = os.path.join(output_dir, filename)
+
+            cv2.imwrite(filepath, frame)
+            print(f"Picture taken and saved as {filepath}")
+        else:
+            print("Picture taken")
+            return frame
 
     finally:
         camera.release()

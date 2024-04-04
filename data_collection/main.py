@@ -6,8 +6,19 @@ import logging
 import time
 import subprocess
 import re
+import json
+
+from dotenv import load_dotenv
 
 from util.capture_image import take_picture
+from util.people_detection import detect, getPeopleCount
+from util.wifi_bt_processing import get_and_parse_data
+
+load_dotenv()  # Load environment variables
+
+DEVICE_IDX = os.getenv("DEVICE_IDX")
+DEVICE_IDX = DEVICE_IDX if DEVICE_IDX else -1
+USE_DEMO_DATA = os.getenv("USE_DEMO_DATA") is not None
 
 
 def main():
@@ -44,8 +55,9 @@ def main():
     for i in range(5):
         time.sleep(1)
         print(f"{4 - i}")
-    take_picture("./images/")
-    print("Picture taken and saved.")
+    bbox_count = getPeopleCount(detect(take_picture(save=False)))
+    print(f"Number of people detected: {bbox_count}")
+    # print("Picture taken and saved.")
 
     # Run nmcli command to get the wifi signal strength.
     print("Attempting to get wifi signal strength")
@@ -68,7 +80,9 @@ def main():
             try:
                 # Now get the signal strength from the filtered output.
                 print(ap)
-                r = re.compile(r"(\*)?:((?:(?:[0-9A-F]{2})\\:){5}[0-9A-F]{2}):(.*):(\d+)").search(ap)
+                r = re.compile(
+                    r"(\*)?:((?:(?:[0-9A-F]{2})\\:){5}[0-9A-F]{2}):(.*):(\d+)"
+                ).search(ap)
                 in_use, bssid, ssid, signal_strength = r.groups()
                 logger.info("SIT-WIFI %s Signal Strength: %s", bssid, signal_strength)
 
@@ -99,7 +113,20 @@ def main():
         f2.write(f"{timenow} - Scan end\n")
         logger.debug("Bluetoothctl output written to btoutput.txt")
 
+    # Data formatting
+    wifi_data, bt_data = get_and_parse_data(USE_DEMO_DATA)
+    data_dict = {
+        "wifi": wifi_data,
+        "bluetooth": bt_data,
+    }
+    data_dict["bbox_count"] = bbox_count
+
+    # Send data to the fog
+    print("Sending data to the fog")
+    payload = json.dumps(data_dict)
+
     print("Program terminated.")
+
 
 if __name__ == "__main__":
     main()
