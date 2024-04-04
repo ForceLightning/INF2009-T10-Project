@@ -344,3 +344,8 @@ $RECYCLE.BIN/
 
 # Data
 data/
+deployment/btoutput.txt
+deployment/wifi_signal_strength.csv
+
+# Models
+*.pt

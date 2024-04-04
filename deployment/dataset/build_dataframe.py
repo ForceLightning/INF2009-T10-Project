@@ -1,5 +1,6 @@
 import os
 import re
+from typing import Optional
 
 import numpy as np
 import pandas as pd
@@ -167,7 +168,9 @@ def get_population_count_df(
     return df
 
 
-def get_bbox_df(csv_path: os.PathLike | str, columns: list[str] = None) -> pd.DataFrame:
+def get_bbox_df(
+    csv_path: os.PathLike | str, columns: Optional[list[str]] = None
+) -> pd.DataFrame:
     """Get bounding box counts DataFrame
 
     :param csv_path: Path to the CSV file

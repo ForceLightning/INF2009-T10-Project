@@ -1,13 +1,14 @@
 """Runs tests on the data collection methods in util/wifi_bt_processing.py.
 """
+
 import unittest
 
 from util.wifi_bt_processing import parse_wifi_data, parse_bt_data
 
 
 class TestDataCollectionMethods(unittest.TestCase):
-    """Test case for data collection methods.
-    """
+    """Test case for data collection methods."""
+
     def test_bt_parse(self):
         """Tests the parsing of bluetooth data from a file."""
         with open("tests/test_data/bt_data.txt", "r", encoding="utf-8") as f:

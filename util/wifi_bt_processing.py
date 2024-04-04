@@ -4,10 +4,11 @@
 import logging
 import re
 import subprocess
+from typing import Sequence
 
 
 def process_signals(
-    wifi_stdout: list[tuple[str, str, int]], bt_stdout: list[str]
+    wifi_stdout: Sequence[str], bt_stdout: Sequence[str]
 ) -> tuple[list[int], int]:
     """Processes wifi and bluetooth outputs from :func:`get_bluetooth_data` and
     :func:`get_wifi_data`
@@ -52,14 +53,14 @@ def get_wifi_data(ap: str = "SIT-POLY") -> list[str]:
     result = subprocess.run(
         command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False
     )
-    return result.stdout.decode()
+    return result.stdout.decode().splitlines()
 
 
-def parse_bt_data(bt_stdout: list[str]) -> int:
+def parse_bt_data(bt_stdout: Sequence[str]) -> int:
     """Parses bluetooth data retrieved from :func:`get_bluetooth_data`
 
     :param bt_stdout: Bluetooth data from :func:`get_bluetooth_data`
-    :type bt_stdout: list[str]
+    :type bt_stdout: Sequence[str]
     :return: Number of bluetooth devices detected
     :rtype: int
     """
@@ -74,13 +75,11 @@ def parse_bt_data(bt_stdout: list[str]) -> int:
     return num_devices
 
 
-def parse_wifi_data(
-    wifi_stdout: list[tuple[str, str, int]], top_n: int = 5
-) -> list[int]:
+def parse_wifi_data(wifi_stdout: Sequence[str], top_n: int = 5) -> list[int]:
     """Parses wifi data output from :func:`get_wifi_data`
 
     :param wifi_stdout: WiFi data output from :func:`get_wifi_data`
-    :type wifi_stdout: list[tuple[str, str, int]]
+    :type wifi_stdout: Sequence[str]
     :param top_n: Number of results to provide, -1 for all, defaults to 5
     :type top_n: int, optional
     :return: Signal strengths of APs
@@ -93,6 +92,8 @@ def parse_wifi_data(
         for ap in wifi_stdout:
             try:
                 r = pattern.search(ap)
+                if not r:
+                    continue
                 _, bssid, ssid, signal_strength = r.groups()
                 signal_strength = int(signal_strength)
                 res.append((bssid, ssid, signal_strength))
@@ -112,7 +113,7 @@ def parse_wifi_data(
     return res[:top_n]
 
 
-def get_and_parse_data(demo_env: bool = False) -> tuple[list[int], int]:
+def get_and_parse_data(demo_env: bool = False) -> tuple[list[int], int] | None:
     """Gets and parses WiFi and Bluetooth data.
 
     :param demo_env: In demo environment, it loads the data from file, defaults to False

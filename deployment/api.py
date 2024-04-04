@@ -1,4 +1,8 @@
-import time
+"""FastAPI server for crowd status API.
+"""
+
+import datetime
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -11,16 +15,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-crowd_status = None
-last_updated_time = None
+# TODO: Use a TypedDict for the status parameter.
+CROWD_STATUS: float | None = None
+LAST_UPDATED_TIME: datetime.datetime | None = None
+
 
 @app.post("/api/update_crowd_status")
-def update_crowd_status(status: dict):
-    global crowd_status, last_updated_time
+def update_crowd_status(status: dict) -> None:
+    """Updates the crowd status.
 
-    crowd_status = status["status"]
-    last_updated_time = status["timestamp"]
+    :param status: The crowd status and timestamp
+    :type status: dict
+    """
+    global CROWD_STATUS, LAST_UPDATED_TIME
+
+    CROWD_STATUS = status["status"]
+    LAST_UPDATED_TIME = status["timestamp"]
+
 
 @app.get("/api/get_crowd_status")
-def get_crowd_status():
-    return {"crowd_status": crowd_status, "timestamp": last_updated_time}
+def get_crowd_status() -> dict:
+    """Gets the current crowd status.
+
+    :return: The crowd status and timestamp
+    :rtype: dict[str, float | datetime.datetime]
+    """
+    return {"crowd_status": CROWD_STATUS, "timestamp": LAST_UPDATED_TIME}

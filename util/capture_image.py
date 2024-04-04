@@ -1,41 +1,56 @@
-import cv2
-import time
+import base64
 import os
+import time
+from typing import Optional
 
-def take_picture(output_dir=None, save=True):
+import cv2
+
+
+def take_picture(
+    output_dir: Optional[str | os.PathLike] = None,
+) -> cv2.typing.MatLike:
+
     camera = cv2.VideoCapture(0)
 
     try:
         # Capture the picture
         _, frame = camera.read()
 
-        if save:
+        if output_dir:
             timestamp = time.strftime("%Y%m%d%H%M")
             filename = f"image_{timestamp}.jpg"
             filepath = os.path.join(output_dir, filename)
 
             cv2.imwrite(filepath, frame)
             print(f"Picture taken and saved as {filepath}")
-        else:
-            print("Picture taken")
-            return frame
+        return frame
+
+    except Exception as exc:
+        raise exc  # Handle the exception in the caller
 
     finally:
         camera.release()
 
+
+def encode_image(frame: cv2.typing.MatLike) -> str:
+    _, buffer = cv2.imencode(".jpg", frame)
+    img_bytes = base64.b64encode(buffer).decode("utf-8")
+    return img_bytes
+
+
 if __name__ == "__main__":
-    output_directory = "images"
+    OUTPUT_DIR = "images"
 
     # Create the output directory if it doesn't exist
-    if not os.path.exists(output_directory):
-        os.makedirs(output_directory)
-        print(f"Created directory: {output_directory}")
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+        print(f"Created directory: {OUTPUT_DIR}")
 
     try:
         while True:
-            take_picture(output_directory)
+            take_picture(OUTPUT_DIR)
             # Sleep for 30 minutes (1800 seconds)
-            time.sleep(1800)  
+            time.sleep(1800)
 
     except KeyboardInterrupt:
         print("\nProgram terminated by user.")

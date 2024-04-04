@@ -11,7 +11,7 @@ import json
 from dotenv import load_dotenv
 
 from util.capture_image import take_picture
-from util.people_detection import detect, getPeopleCount
+from util.people_detection import detect, get_people_count
 from util.wifi_bt_processing import get_and_parse_data
 
 load_dotenv()  # Load environment variables
@@ -27,9 +27,6 @@ def main():
     file_handler = logging.FileHandler(
         os.path.join(os.path.dirname(__file__), "app.log")
     )
-
-    start_time = time.time()
-    end_time = start_time + 5 * 60
 
     # Create a formatter and set the formatter for the handler.
     formatter = logging.Formatter(
@@ -55,7 +52,7 @@ def main():
     for i in range(5):
         time.sleep(1)
         print(f"{4 - i}")
-    bbox_count = getPeopleCount(detect(take_picture(save=False)))
+    bbox_count = get_people_count(detect(take_picture()))
     print(f"Number of people detected: {bbox_count}")
     # print("Picture taken and saved.")
 
@@ -83,7 +80,9 @@ def main():
                 r = re.compile(
                     r"(\*)?:((?:(?:[0-9A-F]{2})\\:){5}[0-9A-F]{2}):(.*):(\d+)"
                 ).search(ap)
-                in_use, bssid, ssid, signal_strength = r.groups()
+                if not r:
+                    continue
+                _, bssid, ssid, signal_strength = r.groups()
                 logger.info("SIT-WIFI %s Signal Strength: %s", bssid, signal_strength)
 
                 with open("wifi_signal_strength.csv", "a", encoding="utf-8") as f:
@@ -114,7 +113,9 @@ def main():
         logger.debug("Bluetoothctl output written to btoutput.txt")
 
     # Data formatting
-    wifi_data, bt_data = get_and_parse_data(USE_DEMO_DATA)
+    data = get_and_parse_data(USE_DEMO_DATA)
+    if data:
+        wifi_data, bt_data = data
     data_dict = {
         "wifi": wifi_data,
         "bluetooth": bt_data,
