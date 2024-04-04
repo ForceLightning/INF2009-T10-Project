@@ -2,9 +2,13 @@
 """
 
 import logging
+import math
+from pathlib import Path
 import re
 import subprocess
 from typing import Sequence
+
+import pandas as pd
 
 
 def process_signals(
@@ -44,7 +48,7 @@ def get_wifi_data(ap: str = "SIT-POLY") -> list[str]:
 
     :param ap: AP SSID to filter for
     :type ap: str
-    :return: Top $N$ list of bssid, ssid, and signal strength results.
+    :return: Top :math:`N` list of bssid, ssid, and signal strength results.
     :rtype: list[tuple[str, str, int]]
     """
     command = "sudo nmcli dev wifi rescan"
@@ -113,17 +117,57 @@ def parse_wifi_data(wifi_stdout: Sequence[str], top_n: int = 5) -> list[int]:
     return res[:top_n]
 
 
-def get_and_parse_data(demo_env: bool = False) -> tuple[list[int], int] | None:
+def get_and_parse_data(
+    demo_env: bool = False, device_idx: int = 0, **kwargs
+) -> tuple[list[int], int]:
     """Gets and parses WiFi and Bluetooth data.
 
     :param demo_env: In demo environment, it loads the data from file, defaults to False
     :type demo_env: bool, optional
+    :param device_idx: Device index or id, defaults to 0
+    :type device_idx: int, optional
+    :param kwargs: Additional keyword arguments with the following keys:
+        - koufu_csv_path: Path to the koufu csv file
+        - total_devices: Total number of devices
+        - top_n: Number of top APs to consider
+    :type kwargs: dict
     :return: Tuple of WiFi and Bluetooth data from :func:`process_signals`
     :rtype: tuple[list[int], int]
     """
     if demo_env:
-        # TODO(chris): implement data loading from file
-        return None
+        return get_demo_data(device_idx, **kwargs)
     wifi_data = get_wifi_data()
     bt_data = get_bluetooth_data()
     return process_signals(wifi_data, bt_data)
+
+
+def get_demo_data(
+    device_idx: int, koufu_csv_path: str | Path, total_devices: int = 4, top_n: int = 5
+) -> tuple[list[int], int]:
+    """Gets the demo data from the koufu csv file.
+
+    :param device_idx: Device index or id
+    :type device_idx: int
+    :param koufu_csv_path: CSV file path
+    :type koufu_csv_path: str | Path
+    :param total_devices: Total number of devices, defaults to 4
+    :type total_devices: int, optional
+    :param top_n: Top :math:`N` APs in the file, defaults to 5
+    :type top_n: int, optional
+    :return: Tuple of WiFi and Bluetooth data
+    :rtype: tuple[list[int], int]
+    """
+
+    # Load the data from the csv file
+    df = pd.read_csv(koufu_csv_path)
+
+    # Wifi column indices
+    col_idx = [1 + top_n * device_idx + i for i in range(top_n)]
+
+    # Add the bluetooth column index
+    bt_col_idx = 1 + total_devices * top_n + device_idx
+
+    # Add the bounding box column index
+    # col_idx.append(1 + total_devices * (top_n + 1) + device_idx)
+
+    return df.iloc[3, col_idx].astype(int).tolist(), math.ceil(df.iloc[3, bt_col_idx])

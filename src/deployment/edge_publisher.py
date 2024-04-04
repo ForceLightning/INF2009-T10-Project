@@ -2,6 +2,7 @@
 """
 
 import json
+import os
 import time
 
 import paho.mqtt.client as mqtt
@@ -13,7 +14,6 @@ from deployment.config import (
     TOPIC,
     USE_DEMO_DATA,
 )
-
 from util.capture_image import encode_image, take_picture
 from util.people_detection import detect
 from util.wifi_bt_processing import get_and_parse_data
@@ -30,18 +30,35 @@ def retrieve_data(device_id: int = DEVICE_IDX, return_image: bool = False) -> st
     :rtype: str
     """
 
-    # Capture an image from the camera
-    image = take_picture()
+    # Get the wifi signal strength
+    wifi_strength, bt_output = get_and_parse_data(
+        USE_DEMO_DATA,
+        device_id,
+        koufu_csv_path=os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "demo/koufu.csv"
+        ),
+        total_devices=4,
+        top_n=5,
+    )
+
+    if USE_DEMO_DATA:
+        image = take_picture(
+            None,
+            USE_DEMO_DATA,
+            filename=os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                f"demo/image_{device_id}.jpg",
+            ),
+        )
+    else:
+        # Capture an image from the camera
+        image = take_picture()
+
     if return_image:
         image_inference = encode_image(image)
     else:
         preds = detect(image)
         image_inference = len(preds)
-
-    # Get the wifi signal strength
-    data = get_and_parse_data(USE_DEMO_DATA)
-    if data:
-        wifi_strength, bt_output = data
 
     return json.dumps(
         {

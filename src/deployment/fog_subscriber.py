@@ -10,7 +10,7 @@ import paho.mqtt.client as mqtt
 import pandas as pd
 import requests
 
-from deployment.config import BROKER_IP, TOPIC
+from deployment.config import BROKER_IP, TOPIC, RETURN_IMAGE
 
 
 def decode_img(payload: str) -> cv2.typing.MatLike:
@@ -67,7 +67,11 @@ def model_inference():
     # TODO(chris): Perform model inference here
     # Get list of images
     images_list = list(stored_data["images"].values())
+    if RETURN_IMAGE:
+        # TODO: Perform image processing here
+        pass
 
+    # TODO(chris): Parse and process the wifi and bluetooth data.
     # Get list of wifi data
     wifi_data_list = [
         pd.read_json(StringIO(df), orient="split")

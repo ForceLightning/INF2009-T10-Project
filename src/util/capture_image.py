@@ -1,3 +1,6 @@
+"""This script captures an image from the webcam and can encode it as a base64 string.
+"""
+
 import base64
 import os
 import time
@@ -8,7 +11,23 @@ import cv2
 
 def take_picture(
     output_dir: Optional[str | os.PathLike] = None,
+    use_demo_data: bool = False,
+    **kwargs,
 ) -> cv2.typing.MatLike:
+    """Takes a picture using the webcam and saves it to the specified directory if provided.
+
+    :param output_dir: Output directory for the image, defaults to None
+    :type output_dir: Optional[str  |  os.PathLike], optional
+    :param use_demo_data: Whether to load demo data, defaults to False
+    :type use_demo_data: bool, optional
+    :param **kwargs: Keyword arguments for cv2.imread if use_demo_data is True (e.g., filename, flags)
+    :raises exc: Any exception that occurs during the process
+    :return: The captured image
+    :rtype: cv2.typing.MatLike
+    """
+    if use_demo_data:
+        im = cv2.imread(**kwargs)
+        return im
 
     camera = cv2.VideoCapture(0)
 
@@ -33,6 +52,13 @@ def take_picture(
 
 
 def encode_image(frame: cv2.typing.MatLike) -> str:
+    """Encodes an image into a base64 string.
+
+    :param frame: The image to encode
+    :type frame: cv2.typing.MatLike
+    :return: Base64 encoded image
+    :rtype: str
+    """
     _, buffer = cv2.imencode(".jpg", frame)
     img_bytes = base64.b64encode(buffer).decode("utf-8")
     return img_bytes

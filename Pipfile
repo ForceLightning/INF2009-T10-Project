@@ -24,11 +24,12 @@ fastapi = "==0.110.1"
 
 [dev-packages]
 ipykernel = "*"
-ipywidgets = "*"
 autopep8 = "*"
 pylint = "*"
 pre-commit = "*"
 sphinx = "*"
+multiprocess = "*"
+ipywidgets = "*"
 
 [requires]
 python_version = "3.12"

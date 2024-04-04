@@ -349,3 +349,4 @@ deployment/wifi_signal_strength.csv
 
 # Models
 *.pt
+*.pkl
