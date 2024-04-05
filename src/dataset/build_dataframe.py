@@ -67,7 +67,7 @@ def get_wifi_dataframe(
 
     super_df = pd.DataFrame(columns=columns)
     for root, _, files in tqdm(os.walk(raw_data_path)):
-        name = root.rsplit("/", 1)[-1]
+        name = root.rsplit(os.sep, 1)[-1]
         for file in files:
             if not file.endswith(".csv"):
                 continue
@@ -116,7 +116,7 @@ def get_bluetooth_dataframe(
     )
 
     for root, _, files in tqdm(os.walk(raw_data_path)):
-        name = root.rsplit("/", 1)[-1]
+        name = root.rsplit(os.sep, 1)[-1]
         for file in files:
             if not file.endswith(".txt"):
                 continue

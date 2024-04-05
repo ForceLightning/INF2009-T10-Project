@@ -1,6 +1,7 @@
 """Runs tests on the data collection methods in util/wifi_bt_processing.py.
 """
 
+import os
 import unittest
 
 from util.wifi_bt_processing import parse_wifi_data, parse_bt_data
@@ -11,7 +12,8 @@ class TestDataCollectionMethods(unittest.TestCase):
 
     def test_bt_parse(self):
         """Tests the parsing of bluetooth data from a file."""
-        with open("tests/test_data/bt_data.txt", "r", encoding="utf-8") as f:
+        bt_data = os.path.join(os.path.dirname(__file__), "test_data/bt_data.txt")
+        with open(bt_data, "r", encoding="utf-8") as f:
             test_data = f.read()
         self.assertEqual(parse_bt_data(test_data.splitlines()), 21)
 

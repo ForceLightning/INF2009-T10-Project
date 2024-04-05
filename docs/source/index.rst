@@ -17,6 +17,7 @@ Modules
 * :mod:`dataset`
 * :mod:`tests`
 * :mod:`util`
+* :mod:`train_and_score`
 
 
 Indices and tables
