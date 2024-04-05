@@ -21,6 +21,7 @@ ultralytics = "==8.1.29"
 python-dotenv = "==1.0.1"
 paho-mqtt = "==2.0.0"
 fastapi = "==0.110.1"
+uvicorn = "*"
 
 [dev-packages]
 ipykernel = "*"

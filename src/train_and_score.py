@@ -1,21 +1,54 @@
+"""Train and score linear regression models using tabular data.
+"""
+
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import KFold
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
 
 
-def train_and_score_tabular1(X, Y, kf) -> list[float]:
+def train_and_score_tabular1(
+    X: pd.DataFrame, y: pd.DataFrame, kf: KFold
+) -> list[float]:
+    """Train and score a linear regression model using tabular data.
+
+    :param X: Input features
+    :type X: pd.DataFrame
+    :param y: Target variable
+    :type y: pd.DataFrame
+    :param kf: KFold object
+    :type kf: KFold
+    :return: List of scores
+    :rtype: list[float]
+    """
     scores = []
     for train_index, test_index in kf.split(X):
         x_train, x_test = X.iloc[train_index], X.iloc[test_index]
-        y_train, y_test = Y.iloc[train_index], Y.iloc[test_index]
+        y_train, y_test = y.iloc[train_index], y.iloc[test_index]
         reg = make_pipeline(StandardScaler(), LinearRegression())
         reg.fit(x_train, y_train)
         scores.append(reg.score(x_test, y_test))
     return scores
 
 
-def train_and_score_tabular2(args) -> list[float]:
-    X, Y, kf, timestamps = args
+def train_and_score_tabular2(
+    X: pd.DataFrame, Y: pd.DataFrame, kf: KFold, timestamps: pd.Series
+) -> list[float]:
+    """Trains and scores a linear regression model using tabular data.
+
+    :param X: Input features
+    :type X: pd.DataFrame
+    :param Y: Target variable
+    :type Y: pd.DataFrame
+    :param kf: KFold object
+    :type kf: KFold
+    :param timestamps: Timestamps for splitting the data
+    :type timestamps: pd.Series
+    :return: List of scores
+    :rtype: list[float]
+    """
+
     scores = []
     for train_timestamp_idx, test_timestamp_idx in kf.split(timestamps):
         train_timestamp = timestamps[train_timestamp_idx]

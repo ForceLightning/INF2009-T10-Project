@@ -11,6 +11,13 @@ Welcome to INF2009-T10-Project's documentation!
    :caption: Contents:
 
 
+Modules
+=======
+* :mod:`deployment`
+* :mod:`dataset`
+* :mod:`tests`
+* :mod:`util`
+
 
 Indices and tables
 ==================

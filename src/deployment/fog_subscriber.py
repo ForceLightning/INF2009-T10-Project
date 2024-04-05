@@ -111,8 +111,8 @@ def on_message(client: mqtt.Client, userdata: Any, message: mqtt.MQTTMessage):
         device_id=device_id,
         return_image=received_data["return_image"],
         image=received_data["image"],
-        wifi_data=received_data["wifi_data"],
-        bt_data=received_data["bt_data"],
+        wifi_data=received_data["wifi_strength"],
+        bt_data=received_data["bt_output"],
     )
 
     # Perform inference on the image if it is returned.
@@ -153,7 +153,12 @@ def model_inference(
     prod_data = parse_data_into_numpy(crowd_status)
 
     # Load the model
-    with open(os.path.join(models_dir, f"{model_name}.pkl"), "rb") as f:
+    with open(
+        os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), models_dir, f"{model_name}.pkl"
+        ),
+        "rb",
+    ) as f:
         model = pickle.load(f)
 
     # Perform inference

@@ -17,10 +17,11 @@ def take_picture(
     """Takes a picture using the webcam and saves it to the specified directory if provided.
 
     :param output_dir: Output directory for the image, defaults to None
-    :type output_dir: Optional[str  |  os.PathLike], optional
+    :type output_dir: Optional[str | os.PathLike], optional
     :param use_demo_data: Whether to load demo data, defaults to False
     :type use_demo_data: bool, optional
-    :param **kwargs: Keyword arguments for cv2.imread if use_demo_data is True (e.g., filename, flags)
+    :param ``**kwargs``: Keyword arguments for cv2.imread if use_demo_data is True
+        (e.g., filename, flags)
     :raises exc: Any exception that occurs during the process
     :return: The captured image
     :rtype: cv2.typing.MatLike

@@ -189,8 +189,9 @@ def get_wifi_column_indices(
     device_idx: int = DEVICE_IDX, column_offset: int = 1, top_n: int = TOP_N_APS
 ) -> list[int]:
     r"""Gets the column indices of the WiFi signal strengths.
+
     .. math::
-        \texttt{column\_indices} = \left[ \texttt{column\_offset} + \text{top}_n \times \texttt{device\_idx} + i \right]_{i=0}^{\text{top}_n}
+        \texttt{column_indices} = \left[ \texttt{column_offset} + \text{top}_n \times \texttt{device_idx} + i \right]_{i=0}^{\text{top}_n}
 
     :param device_idx: Device index or id
     :type device_idx: int
@@ -214,7 +215,7 @@ def get_bt_column_index(
     r"""Gets the column index for the specified device for BT data.
 
     .. math::
-        \texttt{column\_index} = \text{column\_offset} + \texttt{total\_devices} \times \left( \text{top}_n + 1 \right) + \texttt{device\_idx}
+        \texttt{column_index} = \text{column_offset} + \texttt{total_devices} \times \left( \text{top}_n + 1 \right) + \texttt{device_idx}
 
     :param device_idx: Device index or id, defaults to `DEVICE_IDX`
     :type device_idx: int
@@ -241,7 +242,7 @@ def get_bbox_counts_column_index(
     r"""Gets the column index for the bounding box counts for the specified device.
 
     .. math::
-        \texttt{column\_index} = \text{column\_offset} + \texttt{total\_devices} \times \left( \text{top}_n + 1 \right) + \texttt{device\_idx}
+        \texttt{column_index} = \text{column_offset} + \texttt{total_devices} \times \left( \text{top}_n + 1 \right) + \texttt{device_idx}
 
     :param device_idx: Device index or id, defaults to `DEVICE_IDX`
     :type device_idx: int, optional

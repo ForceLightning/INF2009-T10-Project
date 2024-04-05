@@ -44,6 +44,10 @@ TOTAL_DEVICES = int(TOTAL_DEVICES) if TOTAL_DEVICES else 4
 TOP_N_APS = os.getenv("TOP_N_APS")
 TOP_N_APS = int(TOP_N_APS) if TOP_N_APS else 5
 
+#: Host for the uvicorn server.
+UVICORN_HOST = os.getenv("UVICORN_HOST")
+UVICORN_HOST = UVICORN_HOST if UVICORN_HOST else "localhost"
+
 if __name__ == "__main__":
     print(
         f"DEVICE_IDX: {DEVICE_IDX}, {type(DEVICE_IDX)}",
