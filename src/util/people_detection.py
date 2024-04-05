@@ -1,6 +1,7 @@
 """Detect people in images and save the results to a CSV file.
 """
 
+import argparse
 import os
 from pathlib import Path
 
@@ -63,7 +64,7 @@ def open_image(image_path: str | bytes | Path) -> Image.Image:
 
 
 # Function to load images, perform object detection, and save results to a CSV file
-def training_output() -> None:
+def training_output(data_dir: str | Path, out_dir: str | Path) -> None:
     """Function to load images, perform object detection, and save results to a CSV file.
 
     :return: None
@@ -77,39 +78,52 @@ def training_output() -> None:
     image_failed = []
 
     # Clear the file and write header
-    with open("bbox_results.csv", "w", encoding="utf-8") as f:
+    with open(os.path.join(out_dir, "bbox_results.csv"), "w", encoding="utf-8") as f:
+        f.truncate(0)
+        f.seek(0)
         f.write("Timestamp,Device_ID,Bbox Count\n")
 
     # Loop through each collector
     for collector in COLLECTORS:
-        images = os.listdir((f"{DATA_PATH}/{collector}/images/"))
+        images = os.listdir((f"{data_dir}/{collector}/images/"))
         total_images += len(images)
         # Loop through each image in the collector's directory
         for image in images:
             try:
                 # Load image
-                img = open_image(f"{DATA_PATH}/{collector}/images/{image}")
+                img = open_image(f"{data_dir}/{collector}/images/{image}")
 
                 # Perform object detection and count people
                 count = get_people_count(detect(img))
 
                 # Save results to CSV
-                with open("bbox_results.csv", "a", encoding="utf-8") as f:
+                with open(
+                    os.path.join(out_dir, "bbox_results.csv"), "a", encoding="utf-8"
+                ) as f:
                     f.write(f"{image[6:-4]},{COLLECTORS.index(collector)},{count}\n")
             except Exception as e:
                 # Record failed images
-                image_failed.append(f"{DATA_PATH}/{collector}/images/{image}")
-                raise e
+                image_failed.append(f"{data_dir}/{collector}/images/{image}")
+                continue
 
     # Print summary
     print(f"Total images processed: {total_images}")
     print(f"Images failed: {image_failed}")
 
 
-def main():
+def main(data_dir: str | Path = DATA_PATH, out_dir: str | Path = DATA_PATH) -> None:
     """The main function for training the YOLO model and saving the results to a CSV file."""
-    training_output()
+    training_output(data_dir, out_dir)
 
 
 if __name__ == "__main__":
-    main()
+    args = argparse.ArgumentParser(
+        description="Detect people in images and save the results to a CSV file."
+    )
+    args.add_argument(
+        "--data_dir", type=str, default=DATA_PATH, help="Path to the data directory"
+    )
+    args.add_argument(
+        "--out_dir", type=str, default=DATA_PATH, help="Path to the output directory"
+    )
+    main(**vars(args.parse_args()))

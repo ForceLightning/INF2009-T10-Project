@@ -187,7 +187,7 @@ def get_bbox_df(
         df = pd.read_csv(csv_path, names=columns, header=1)
     else:
         df = pd.read_csv(csv_path)
-    df = convert_timestamps_to_datetime(df, df.columns[0])
+    df = convert_timestamps_to_datetime(df, df.columns[0], fmt="%Y%m%d%H%M")
     return df
 
 

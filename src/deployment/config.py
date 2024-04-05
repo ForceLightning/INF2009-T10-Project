@@ -6,35 +6,43 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Device ID set by environment variables
+#: Device ID set by environment variables
 DEVICE_IDX = os.getenv("DEVICE_IDX")
 DEVICE_IDX = int(DEVICE_IDX) if DEVICE_IDX else -1
 
-# Whether to use demo data
+#: Whether to use demo data
 USE_DEMO_DATA = os.getenv("USE_DEMO_DATA")
 USE_DEMO_DATA = USE_DEMO_DATA == "True"
 
-# Whether to return the image or not
+#: Whether to return the image or not
 RETURN_IMAGE = os.getenv("RETURN_IMAGE")
 RETURN_IMAGE = RETURN_IMAGE == "True"
 
-# Interval between each data retrieval
+#: Interval between each data retrieval
 PUBLISHER_INTERVAL = os.getenv("PUBLISHER_INTERVAL")
 PUBLISHER_INTERVAL = int(PUBLISHER_INTERVAL) if PUBLISHER_INTERVAL else 50
 
-# IP address of the MQTT broker
+#: IP address of the MQTT broker
 BROKER_IP = os.getenv("BROKER_IP")
 BROKER_IP = BROKER_IP if BROKER_IP else "localhost"
 
-# Topic to publish collected data to
+#: Topic to publish collected data to
 TOPIC = os.getenv("TOPIC")
 TOPIC = TOPIC if TOPIC else "data"
 
-# Topic to retrieve data from the client devices
+#: Topic to retrieve data from the client devices
 CLIENT_RETRIEVAL_TOPIC = os.getenv("CLIENT_RETRIEVAL_TOPIC")
 CLIENT_RETRIEVAL_TOPIC = (
     CLIENT_RETRIEVAL_TOPIC if CLIENT_RETRIEVAL_TOPIC else "client_data"
 )
+
+#: Total number of edge devices (must be the same for training and inference)
+TOTAL_DEVICES = os.getenv("TOTAL_DEVICES")
+TOTAL_DEVICES = int(TOTAL_DEVICES) if TOTAL_DEVICES else 4
+
+#: Top N WiFi APs to consider.
+TOP_N_APS = os.getenv("TOP_N_APS")
+TOP_N_APS = int(TOP_N_APS) if TOP_N_APS else 5
 
 if __name__ == "__main__":
     print(

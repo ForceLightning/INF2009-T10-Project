@@ -10,6 +10,8 @@ from typing import Sequence
 
 import pandas as pd
 
+from deployment.config import DEVICE_IDX, TOTAL_DEVICES, TOP_N_APS
+
 
 def process_signals(
     wifi_stdout: Sequence[str], bt_stdout: Sequence[str]
@@ -135,14 +137,18 @@ def get_and_parse_data(
     :rtype: tuple[list[int], int]
     """
     if demo_env:
-        return get_demo_data(device_idx, **kwargs)
+        return get_demo_data(device_idx, **kwargs, index=-1)
     wifi_data = get_wifi_data()
     bt_data = get_bluetooth_data()
     return process_signals(wifi_data, bt_data)
 
 
 def get_demo_data(
-    device_idx: int, koufu_csv_path: str | Path, total_devices: int = 4, top_n: int = 5
+    device_idx: int,
+    koufu_csv_path: str | Path,
+    total_devices: int = 4,
+    top_n: int = 5,
+    index: int = 0,
 ) -> tuple[list[int], int]:
     """Gets the demo data from the koufu csv file.
 
@@ -154,6 +160,8 @@ def get_demo_data(
     :type total_devices: int, optional
     :param top_n: Top :math:`N` APs in the file, defaults to 5
     :type top_n: int, optional
+    :param index: Index of the row to retrieve, defaults to 0
+    :type index: int, optional
     :return: Tuple of WiFi and Bluetooth data
     :rtype: tuple[list[int], int]
     """
@@ -162,12 +170,90 @@ def get_demo_data(
     df = pd.read_csv(koufu_csv_path)
 
     # Wifi column indices
-    col_idx = [1 + top_n * device_idx + i for i in range(top_n)]
+    wifi_col_idx = get_wifi_column_indices(device_idx, top_n=top_n)
 
     # Add the bluetooth column index
-    bt_col_idx = 1 + total_devices * top_n + device_idx
+    bt_col_idx = get_bt_column_index(
+        device_idx, total_devices=total_devices, top_n=top_n
+    )
 
     # Add the bounding box column index
     # col_idx.append(1 + total_devices * (top_n + 1) + device_idx)
 
-    return df.iloc[3, col_idx].astype(int).tolist(), math.ceil(df.iloc[3, bt_col_idx])
+    return df.iloc[index, wifi_col_idx].astype(int).tolist(), math.ceil(
+        df.iloc[index, bt_col_idx]
+    )  # type: ignore
+
+
+def get_wifi_column_indices(
+    device_idx: int = DEVICE_IDX, column_offset: int = 1, top_n: int = TOP_N_APS
+) -> list[int]:
+    r"""Gets the column indices of the WiFi signal strengths.
+    .. math::
+        \texttt{column\_indices} = \left[ \texttt{column\_offset} + \text{top}_n \times \texttt{device\_idx} + i \right]_{i=0}^{\text{top}_n}
+
+    :param device_idx: Device index or id
+    :type device_idx: int
+    :param column_offset: Offset from the 0th indexed column usually if a
+        timestamp column is the index, defaults to 1
+    :type column_offset: int, optional
+    :param top_n: Top :math:`N` APs used for training and inference, defaults to 5
+    :type top_n: int, optional
+    :return: List of column indices
+    :rtype: list[int]
+    """
+    return [column_offset + top_n * device_idx + i for i in range(top_n)]
+
+
+def get_bt_column_index(
+    device_idx: int = DEVICE_IDX,
+    column_offset: int = 1,
+    total_devices: int = TOTAL_DEVICES,
+    top_n: int = TOP_N_APS,
+) -> int:
+    r"""Gets the column index for the specified device for BT data.
+
+    .. math::
+        \texttt{column\_index} = \text{column\_offset} + \texttt{total\_devices} \times \left( \text{top}_n + 1 \right) + \texttt{device\_idx}
+
+    :param device_idx: Device index or id, defaults to `DEVICE_IDX`
+    :type device_idx: int
+    :param column_offset: Offset from the 0th indexed column usually if a
+        timestamp column is used as the index, defaults to 1
+    :type column_offset: int, optional
+    :param total_devices: Total number of edge devices, defaults to `TOTAL_DEVICES`
+    :type total_devices: int, optional
+    :param top_n: Top :math:`N` WiFi APs used for training and inference,
+        defaults to `TOP_N_APS`
+    :type top_n: int, optional
+    :return: Column index for the BT data
+    :rtype: int
+    """
+    return column_offset + total_devices * top_n + device_idx
+
+
+def get_bbox_counts_column_index(
+    device_idx: int = DEVICE_IDX,
+    column_offset: int = 1,
+    total_devices: int = TOTAL_DEVICES,
+    top_n: int = TOP_N_APS,
+) -> int:
+    r"""Gets the column index for the bounding box counts for the specified device.
+
+    .. math::
+        \texttt{column\_index} = \text{column\_offset} + \texttt{total\_devices} \times \left( \text{top}_n + 1 \right) + \texttt{device\_idx}
+
+    :param device_idx: Device index or id, defaults to `DEVICE_IDX`
+    :type device_idx: int, optional
+    :param column_offset: Offset from the 0th indexed column usually if a
+        timestamp column is used as the index, defaults to 1
+    :type column_offset: int, optional
+    :param total_devices: Total number of edge devices, defaults to `TOTAL_DEVICES`
+    :type total_devices: int, optional
+    :param top_n: Top :math:`N` WiFi APs used for training and inference,
+        defaults to `TOP_N_APS`
+    :type top_n: int, optional
+    :return: Column index for the bounding box counts
+    :rtype: int
+    """
+    return column_offset + total_devices * (top_n + 1) + device_idx
