@@ -1,16 +1,15 @@
 import base64
 import json
 import time
-from io import StringIO
 from typing import Any
 
 import cv2
 import numpy as np
 import paho.mqtt.client as mqtt
-import pandas as pd
 import requests
 
 from deployment.config import BROKER_IP, TOPIC, RETURN_IMAGE
+from util.people_detection import detect
 
 
 def decode_img(payload: str) -> cv2.typing.MatLike:
@@ -44,6 +43,7 @@ def on_message(client: mqtt.Client, userdata: Any, message: mqtt.MQTTMessage):
 
     print(f"Received data from device: {device_id}")
 
+    # TODO: Store the data received from the edge devices based on their device_id
     for data_type, data in stored_data.items():
         if device_id not in data:
             if (
@@ -63,33 +63,24 @@ def on_message(client: mqtt.Client, userdata: Any, message: mqtt.MQTTMessage):
     print("data sent")
 
 
-def model_inference():
-    # TODO(chris): Perform model inference here
+def model_inference() -> int:
     # Get list of images
     images_list = list(stored_data["images"].values())
+
+    # If an image is returned, perform object detection.
     if RETURN_IMAGE:
-        # TODO: Perform image processing here
-        pass
+        count = 0
+        for image in images_list:
+            res = detect(image)
+            count += len(res)
+
+    # Otherwise, just count the number of bounding boxes detected on the edge.
+    else:
+        count = sum(images_list)
 
     # TODO(chris): Parse and process the wifi and bluetooth data.
-    # Get list of wifi data
-    wifi_data_list = [
-        pd.read_json(StringIO(df), orient="split")
-        for df in stored_data["wifi"].values()
-    ]
-    wifi_data_agg = pd.concat(wifi_data_list)
 
-    # Get list of bluetooth data
-    bt_data_list = [
-        pd.read_json(StringIO(df), orient="split") for df in stored_data["bt"].values()
-    ]
-    bt_data_agg = pd.concat(bt_data_list)
-
-    # print(images_list)
-    # print(wifi_data_agg)
-    # print(bt_data_agg)
-
-    # Perform model inference here
+    # TODO(chris): Perform model inference here
 
     return 1  # Dummy return value
 
