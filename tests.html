@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>tests package &#8212; INF2009-T10-Project 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tests-package">
+<h1>tests package<a class="headerlink" href="#tests-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-tests.data_collection">
+<span id="tests-data-collection-module"></span><h2>tests.data_collection module<a class="headerlink" href="#module-tests.data_collection" title="Link to this heading">¶</a></h2>
+<p>Runs tests on the data collection methods in util/wifi_bt_processing.py.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="tests.data_collection.TestDataCollectionMethods">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tests.data_collection.</span></span><span class="sig-name descname"><span class="pre">TestDataCollectionMethods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tests.data_collection.TestDataCollectionMethods" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for data collection methods.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.data_collection.TestDataCollectionMethods.test_bt_parse">
+<span class="sig-name descname"><span class="pre">test_bt_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.data_collection.TestDataCollectionMethods.test_bt_parse" title="Link to this definition">¶</a></dt>
+<dd><p>Tests the parsing of bluetooth data from a file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.data_collection.TestDataCollectionMethods.test_wifi_parse">
+<span class="sig-name descname"><span class="pre">test_wifi_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.data_collection.TestDataCollectionMethods.test_wifi_parse" title="Link to this definition">¶</a></dt>
+<dd><p>Tests the parsing of wifi data from a preformatted string.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.data_collection.suite">
+<span class="sig-prename descclassname"><span class="pre">tests.data_collection.</span></span><span class="sig-name descname"><span class="pre">suite</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TestSuite</span></span></span><a class="headerlink" href="#tests.data_collection.suite" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a test suite for data collection methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Test suite for data collection methods</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>unittest.TestSuite</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-tests.fog_inference">
+<span id="tests-fog-inference-module"></span><h2>tests.fog_inference module<a class="headerlink" href="#module-tests.fog_inference" title="Link to this heading">¶</a></h2>
+<p>Runs tests for the fog subscriber methods.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="tests.fog_inference.TestFogSubscriberMethods">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tests.fog_inference.</span></span><span class="sig-name descname"><span class="pre">TestFogSubscriberMethods</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tests.fog_inference.TestFogSubscriberMethods" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for fog subscriber methods.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tests.fog_inference.TestFogSubscriberMethods.test_inference">
+<span class="sig-name descname"><span class="pre">test_inference</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#tests.fog_inference.TestFogSubscriberMethods.test_inference" title="Link to this definition">¶</a></dt>
+<dd><p>Tests the inference method for the fog subscriber.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.fog_inference.suite">
+<span class="sig-prename descclassname"><span class="pre">tests.fog_inference.</span></span><span class="sig-name descname"><span class="pre">suite</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TestSuite</span></span></span><a class="headerlink" href="#tests.fog_inference.suite" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a test suite for fog subscriber methods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Test suite for fog subscriber methods</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>unittest.TestSuite</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-tests.run_tests">
+<span id="tests-run-tests-module"></span><h2>tests.run_tests module<a class="headerlink" href="#module-tests.run_tests" title="Link to this heading">¶</a></h2>
+<p>Runs all tests in the tests directory.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="tests.run_tests.main">
+<span class="sig-prename descclassname"><span class="pre">tests.run_tests.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tests.run_tests.main" title="Link to this definition">¶</a></dt>
+<dd><p>Main function to run all tests in the tests directory.</p>
+</dd></dl>
+
+</section>
+<section id="module-tests">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tests" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">INF2009-T10-Project</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Christopher Kok, Jurgen Tan, Bryan Seah, Ang Jia Yu, Singapore Institute of Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/tests.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

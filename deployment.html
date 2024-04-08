@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>deployment package &#8212; INF2009-T10-Project 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="deployment-package">
+<h1>deployment package<a class="headerlink" href="#deployment-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-deployment.api">
+<span id="deployment-api-module"></span><h2>deployment.api module<a class="headerlink" href="#module-deployment.api" title="Link to this heading">¶</a></h2>
+<p>FastAPI server for crowd status API.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="deployment.api.CrowdStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deployment.api.</span></span><span class="sig-name descname"><span class="pre">CrowdStatus</span></span><a class="headerlink" href="#deployment.api.CrowdStatus" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>Crowd status and timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>status</strong> (<em>float</em>) – The crowd status</p></li>
+<li><p><strong>timestamp</strong> (<em>datetime.datetime</em>) – The timestamp of the crowd status</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.api.CrowdStatus.one_sigma_conf_interval">
+<span class="sig-name descname"><span class="pre">one_sigma_conf_interval</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#deployment.api.CrowdStatus.one_sigma_conf_interval" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.api.CrowdStatus.status">
+<span class="sig-name descname"><span class="pre">status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#deployment.api.CrowdStatus.status" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.api.CrowdStatus.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#deployment.api.CrowdStatus.timestamp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.api.get_crowd_status">
+<span class="sig-prename descclassname"><span class="pre">deployment.api.</span></span><span class="sig-name descname"><span class="pre">get_crowd_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#deployment.api.get_crowd_status" title="Link to this definition">¶</a></dt>
+<dd><p>Gets the current crowd status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The crowd status and timestamp</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#deployment.api.CrowdStatus" title="deployment.api.CrowdStatus">CrowdStatus</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.api.update_crowd_status">
+<span class="sig-prename descclassname"><span class="pre">deployment.api.</span></span><span class="sig-name descname"><span class="pre">update_crowd_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#deployment.api.update_crowd_status" title="Link to this definition">¶</a></dt>
+<dd><p>Updates the crowd status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>status</strong> (<em>dict</em>) – The crowd status and timestamp</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-deployment.config">
+<span id="deployment-config-module"></span><h2>deployment.config module<a class="headerlink" href="#module-deployment.config" title="Link to this heading">¶</a></h2>
+<p>Loads environment variables and sets global variables for the publisher.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="deployment.config.BROKER_IP">
+<span class="sig-prename descclassname"><span class="pre">deployment.config.</span></span><span class="sig-name descname"><span class="pre">BROKER_IP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'localhost'</span></em><a class="headerlink" href="#deployment.config.BROKER_IP" title="Link to this definition">¶</a></dt>
+<dd><p>IP address of the MQTT broker</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="deployment.config.CLIENT_RETRIEVAL_TOPIC">
+<span class="sig-prename descclassname"><span class="pre">deployment.config.</span></span><span class="sig-name descname"><span class="pre">CLIENT_RETRIEVAL_TOPIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'client_data'</span></em><a class="headerlink" href="#deployment.config.CLIENT_RETRIEVAL_TOPIC" title="Link to this definition">¶</a></dt>
+<dd><p>Topic to retrieve data from the client devices</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="deployment.config.DEVICE_IDX">
+<span class="sig-prename descclassname"><span class="pre">deployment.config.</span></span><span class="sig-name descname"><span class="pre">DEVICE_IDX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#deployment.config.DEVICE_IDX" title="Link to this definition">¶</a></dt>
+<dd><p>Device ID set by environment variables</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="deployment.config.PUBLISHER_INTERVAL">
+<span class="sig-prename descclassname"><span class="pre">deployment.config.</span></span><span class="sig-name descname"><span class="pre">PUBLISHER_INTERVAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">50</span></em><a class="headerlink" href="#deployment.config.PUBLISHER_INTERVAL" title="Link to this definition">¶</a></dt>
+<dd><p>Interval between each data retrieval</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="deployment.config.RETURN_IMAGE">
+<span class="sig-prename descclassname"><span class="pre">deployment.config.</span></span><span class="sig-name descname"><span class="pre">RETURN_IMAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#deployment.config.RETURN_IMAGE" title="Link to this definition">¶</a></dt>
+<dd><p>Whether to return the image or not</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="deployment.config.TOPIC">
+<span class="sig-prename descclassname"><span class="pre">deployment.config.</span></span><span class="sig-name descname"><span class="pre">TOPIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'data'</span></em><a class="headerlink" href="#deployment.config.TOPIC" title="Link to this definition">¶</a></dt>
+<dd><p>Topic to publish collected data to</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="deployment.config.TOP_N_APS">
+<span class="sig-prename descclassname"><span class="pre">deployment.config.</span></span><span class="sig-name descname"><span class="pre">TOP_N_APS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#deployment.config.TOP_N_APS" title="Link to this definition">¶</a></dt>
+<dd><p>Top N WiFi APs to consider.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="deployment.config.TOTAL_DEVICES">
+<span class="sig-prename descclassname"><span class="pre">deployment.config.</span></span><span class="sig-name descname"><span class="pre">TOTAL_DEVICES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#deployment.config.TOTAL_DEVICES" title="Link to this definition">¶</a></dt>
+<dd><p>Total number of edge devices (must be the same for training and inference)</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="deployment.config.USE_DEMO_DATA">
+<span class="sig-prename descclassname"><span class="pre">deployment.config.</span></span><span class="sig-name descname"><span class="pre">USE_DEMO_DATA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#deployment.config.USE_DEMO_DATA" title="Link to this definition">¶</a></dt>
+<dd><p>Whether to use demo data</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="deployment.config.UVICORN_HOST">
+<span class="sig-prename descclassname"><span class="pre">deployment.config.</span></span><span class="sig-name descname"><span class="pre">UVICORN_HOST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'localhost'</span></em><a class="headerlink" href="#deployment.config.UVICORN_HOST" title="Link to this definition">¶</a></dt>
+<dd><p>Host for the uvicorn server.</p>
+</dd></dl>
+
+</section>
+<section id="module-deployment.edge_publisher">
+<span id="deployment-edge-publisher-module"></span><h2>deployment.edge_publisher module<a class="headerlink" href="#module-deployment.edge_publisher" title="Link to this heading">¶</a></h2>
+<p>Edge publisher module for the edge device.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.edge_publisher.main">
+<span class="sig-prename descclassname"><span class="pre">deployment.edge_publisher.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#deployment.edge_publisher.main" title="Link to this definition">¶</a></dt>
+<dd><p>Main function for publishing data to the MQTT broker.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.edge_publisher.retrieve_data">
+<span class="sig-prename descclassname"><span class="pre">deployment.edge_publisher.</span></span><span class="sig-name descname"><span class="pre">retrieve_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_image</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#deployment.edge_publisher.retrieve_data" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves data from the camera, wifi and bluetooth devices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device_id</strong> (<em>int</em><em>, </em><em>optional</em>) – Device ID set by environment variables, defaults to DEVICE_IDX</p></li>
+<li><p><strong>return_image</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to return the image or not, defaults to False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JSON string containing the image, timestamp, wifi signal strength, bluetooth output and device ID</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-deployment.fog_subscriber">
+<span id="deployment-fog-subscriber-module"></span><h2>deployment.fog_subscriber module<a class="headerlink" href="#module-deployment.fog_subscriber" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.CrowdStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deployment.fog_subscriber.</span></span><span class="sig-name descname"><span class="pre">CrowdStatus</span></span><a class="headerlink" href="#deployment.fog_subscriber.CrowdStatus" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>Crowd status data stored by the fog device.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>status</strong> (<em>int</em>) – Number of people in the crowd</p></li>
+<li><p><strong>err</strong> (<em>float</em><em> | </em><em>None</em>) – Error in the crowd status prediction (if any)</p></li>
+<li><p><strong>timestamp</strong> (<em>datetime.datetime</em>) – Timestamp of the crowd status</p></li>
+<li><p><strong>data</strong> (<em>dict</em><em>[</em><em>int</em><em>, </em><a class="reference internal" href="#deployment.fog_subscriber.DataFromEdge" title="deployment.fog_subscriber.DataFromEdge"><em>DataFromEdge</em></a><em>]</em>) – Data received from the edge devices</p></li>
+<li><p><strong>numpy_data</strong> (<em>np.ndarray</em>) – Numpy data for the crowd status prediction</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.CrowdStatus.data">
+<span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#deployment.fog_subscriber.DataFromEdge" title="deployment.fog_subscriber.DataFromEdge"><span class="pre">DataFromEdge</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#deployment.fog_subscriber.CrowdStatus.data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.CrowdStatus.err">
+<span class="sig-name descname"><span class="pre">err</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#deployment.fog_subscriber.CrowdStatus.err" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.CrowdStatus.numpy_data">
+<span class="sig-name descname"><span class="pre">numpy_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span></em><a class="headerlink" href="#deployment.fog_subscriber.CrowdStatus.numpy_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.CrowdStatus.status">
+<span class="sig-name descname"><span class="pre">status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#deployment.fog_subscriber.CrowdStatus.status" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.CrowdStatus.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">datetime</span></em><a class="headerlink" href="#deployment.fog_subscriber.CrowdStatus.timestamp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.DataFromEdge">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">deployment.fog_subscriber.</span></span><span class="sig-name descname"><span class="pre">DataFromEdge</span></span><a class="headerlink" href="#deployment.fog_subscriber.DataFromEdge" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>Data received from the edge devices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>device_id</strong> (<em>int</em>) – Device ID</p></li>
+<li><p><strong>return_image</strong> (<em>bool</em>) – Whether to return the image or not</p></li>
+<li><p><strong>image</strong> (<em>cv2.typing.MatLike</em><em> | </em><em>int</em>) – Image data or bounding box counts</p></li>
+<li><p><strong>wifi_data</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – WiFi signal strength data</p></li>
+<li><p><strong>bt_data</strong> (<em>int</em>) – Bluetooth output data</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.DataFromEdge.bt_data">
+<span class="sig-name descname"><span class="pre">bt_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#deployment.fog_subscriber.DataFromEdge.bt_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.DataFromEdge.device_id">
+<span class="sig-name descname"><span class="pre">device_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#deployment.fog_subscriber.DataFromEdge.device_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.DataFromEdge.image">
+<span class="sig-name descname"><span class="pre">image</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mat</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#deployment.fog_subscriber.DataFromEdge.image" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.DataFromEdge.return_image">
+<span class="sig-name descname"><span class="pre">return_image</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#deployment.fog_subscriber.DataFromEdge.return_image" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.DataFromEdge.wifi_data">
+<span class="sig-name descname"><span class="pre">wifi_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#deployment.fog_subscriber.DataFromEdge.wifi_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.decode_img">
+<span class="sig-prename descclassname"><span class="pre">deployment.fog_subscriber.</span></span><span class="sig-name descname"><span class="pre">decode_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mat</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></span><a class="headerlink" href="#deployment.fog_subscriber.decode_img" title="Link to this definition">¶</a></dt>
+<dd><p>Decodes an image from a base64 string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>str</em>) – Base64 encoded image</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decoded image</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>cv2.typing.MatLike</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.main">
+<span class="sig-prename descclassname"><span class="pre">deployment.fog_subscriber.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#deployment.fog_subscriber.main" title="Link to this definition">¶</a></dt>
+<dd><p>The fog device will keep a copy of the data received from each
+edge device</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.model_inference">
+<span class="sig-prename descclassname"><span class="pre">deployment.fog_subscriber.</span></span><span class="sig-name descname"><span class="pre">model_inference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">crowd_status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#deployment.fog_subscriber.CrowdStatus" title="deployment.fog_subscriber.CrowdStatus"><span class="pre">CrowdStatus</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'data':</span> <span class="pre">{},</span> <span class="pre">'err':</span> <span class="pre">None,</span> <span class="pre">'numpy_data':</span> <span class="pre">array([[0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0]]),</span> <span class="pre">'status':</span> <span class="pre">0,</span> <span class="pre">'timestamp':</span> <span class="pre">datetime.datetime(1970,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0)}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Path</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'models'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gpr'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#deployment.fog_subscriber.model_inference" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.on_message">
+<span class="sig-prename descclassname"><span class="pre">deployment.fog_subscriber.</span></span><span class="sig-name descname"><span class="pre">on_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">userdata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">MQTTMessage</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deployment.fog_subscriber.on_message" title="Link to this definition">¶</a></dt>
+<dd><p>Handles the message received from the edge devices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client</strong> (<em>mqtt.Client</em>) – Client instance for this callback, unused.</p></li>
+<li><p><strong>userdata</strong> (<em>Any</em>) – User data of any type, unused.</p></li>
+<li><p><strong>message</strong> (<em>mqtt.MQTTMessage</em>) – The message received from the edge devices.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.fog_subscriber.parse_data_into_numpy">
+<span class="sig-prename descclassname"><span class="pre">deployment.fog_subscriber.</span></span><span class="sig-name descname"><span class="pre">parse_data_into_numpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">crowd_status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#deployment.fog_subscriber.CrowdStatus" title="deployment.fog_subscriber.CrowdStatus"><span class="pre">CrowdStatus</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'data':</span> <span class="pre">{},</span> <span class="pre">'err':</span> <span class="pre">None,</span> <span class="pre">'numpy_data':</span> <span class="pre">array([[0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0]]),</span> <span class="pre">'status':</span> <span class="pre">0,</span> <span class="pre">'timestamp':</span> <span class="pre">datetime.datetime(1970,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">0,</span> <span class="pre">0)}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#deployment.fog_subscriber.parse_data_into_numpy" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-deployment.preprocessing">
+<span id="deployment-preprocessing-module"></span><h2>deployment.preprocessing module<a class="headerlink" href="#module-deployment.preprocessing" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.preprocessing.process_bt_data">
+<span class="sig-prename descclassname"><span class="pre">deployment.preprocessing.</span></span><span class="sig-name descname"><span class="pre">process_bt_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bt_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deployment.preprocessing.process_bt_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="deployment.preprocessing.process_wifi_data">
+<span class="sig-prename descclassname"><span class="pre">deployment.preprocessing.</span></span><span class="sig-name descname"><span class="pre">process_wifi_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wifi_df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#deployment.preprocessing.process_wifi_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-deployment">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-deployment" title="Link to this heading">¶</a></h2>
+<p>This module contains all the deployment scripts for the project.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">INF2009-T10-Project</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Christopher Kok, Jurgen Tan, Bryan Seah, Ang Jia Yu, Singapore Institute of Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/deployment.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

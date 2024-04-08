@@ -1,0 +1,37 @@
+util package
+============
+
+Submodules
+----------
+
+util.capture\_image module
+--------------------------
+
+.. automodule:: util.capture_image
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+util.people\_detection module
+-----------------------------
+
+.. automodule:: util.people_detection
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+util.wifi\_bt\_processing module
+--------------------------------
+
+.. automodule:: util.wifi_bt_processing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: util
+   :members:
+   :undoc-members:
+   :show-inheritance:

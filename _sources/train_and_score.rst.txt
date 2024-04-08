@@ -1,0 +1,7 @@
+train\_and\_score module
+========================
+
+.. automodule:: train_and_score
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,37 @@
+tests package
+=============
+
+Submodules
+----------
+
+tests.data\_collection module
+-----------------------------
+
+.. automodule:: tests.data_collection
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.fog\_inference module
+---------------------------
+
+.. automodule:: tests.fog_inference
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tests.run\_tests module
+-----------------------
+
+.. automodule:: tests.run_tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: tests
+   :members:
+   :undoc-members:
+   :show-inheritance:

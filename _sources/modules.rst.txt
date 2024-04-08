@@ -1,0 +1,11 @@
+src
+===
+
+.. toctree::
+   :maxdepth: 4
+
+   dataset
+   deployment
+   tests
+   train_and_score
+   util

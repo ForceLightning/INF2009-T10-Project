@@ -1,0 +1,21 @@
+dataset package
+===============
+
+Submodules
+----------
+
+dataset.build\_dataframe module
+-------------------------------
+
+.. automodule:: dataset.build_dataframe
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: dataset
+   :members:
+   :undoc-members:
+   :show-inheritance:
